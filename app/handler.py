@@ -1,4 +1,5 @@
 from paramiko import SSHClient, AutoAddPolicy, RSAKey
+from app import app
 
 class NodeHandler():
     def __init__(self, template, ip, login="root", password=""):
@@ -14,7 +15,7 @@ class NodeHandler():
             if self.password:
                 self.ssh.connect(hostname=self.ip, username=self.login, password=self.password, look_for_keys=False, allow_agent=False)
             else:
-                key = RSAKey.from_private_key_file("/home/redeyed/.ssh/id_rsa")
+                key = RSAKey.from_private_key_file(app.config['DEFAULT_SSH_KEY_PATH'] + 'id_rsa')
                 self.ssh.connect(hostname=self.ip, username=self.login, pkey=key, look_for_keys=False)
             return True
         except:

@@ -20,8 +20,7 @@
     </div>
 {% endblock %}
 {% block app_content %}
-
-<div class="row-fluid">
+<div class="row">
     <div class="col-4 p-4">
         <button class="btn btn-light m-2" data-toggle="modal" data-target="#admin-window" data-action="add">
             <img src="{{ url_for('static', filename='img/add24.png') }}"> Добавить админа...
@@ -47,6 +46,11 @@
             {% endfor %}
         </table>
     </div>
+    <div class="col-6 p-4 offset-1 border border-dark">
+        <p>Открытый ключ для доступа к нодам</p>
+        <p>Добавьте его в ~/.ssh/authorized_keys</p>
+        <p id="ssh-key">{{ key }}</p>
+    </div>
 </div>
 
 {% endblock %}
@@ -54,4 +58,9 @@
 {% block scripts %}
     {{ super() }}
     <script src="{{ url_for('static', filename='js/equipment.js') }}"></script>
+{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}">
 {% endblock %}

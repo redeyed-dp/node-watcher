@@ -46,7 +46,10 @@ def admins():
         flash(f"Добавлен администратор {admin.login}")
         return redirect(url_for("admins"))
     admins = db.session.query(Admin).all()
-    return render_template("admins.html", form=form, admins=admins)
+    f = open(app.config['DEFAULT_SSH_KEY_PATH'] + 'id_rsa.pub')
+    key = ''.join(f.readlines())
+    f.close()
+    return render_template("admins.html", form=form, admins=admins, key=key)
 
 @app.route('/admins/del/<int:id>')
 @login_required
