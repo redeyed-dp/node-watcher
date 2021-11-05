@@ -1,0 +1,57 @@
+{% extends "template.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block modal_content %}
+    <div id="admin-window" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-title"></span>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            {{ wtf.quick_form(form, form_type="horizontal", horizontal_columns=('sm', 3, 9)) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block app_content %}
+
+<div class="row-fluid">
+    <div class="col-4 p-4">
+        <button class="btn btn-light m-2" data-toggle="modal" data-target="#admin-window" data-action="add">
+            <img src="{{ url_for('static', filename='img/add24.png') }}"> Добавить админа...
+        </button>
+        <table class="table table-sm table-hover border border-dark">
+            <thead class="thead-dark">
+                <tr>
+                    <th> Админ </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            {% for admin in admins %}
+                <tbody>
+                    <tr>
+                        <td>{{ admin.login }}</td>
+                        <td>
+                            <a class="btn btn-sm btn-light" href="{{ url_for('admins_del', id=admin.id) }}">
+                                <img src="{{ url_for('static', filename='img/delete.png') }}" title="Удалить">
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/equipment.js') }}"></script>
+{% endblock %}

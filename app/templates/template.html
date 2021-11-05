@@ -13,6 +13,21 @@
     {% block modal_content %}
     {% endblock %}
 <div class="container-fluid">
+    <div class="row bg-dark text-light p-1">
+        <div class="col-sm-2">
+            <a href="{{ url_for('admins') }}">
+                <img src="{{ url_for('static', filename='img/settings.png') }}" title="Настройки">
+            </a>
+        </div>
+        <div class="col-sm-9 text-right">
+            Вы вошли как {{ current_user.login }}
+        </div>
+        <div class="col-sm-1">
+            <a href="{{ url_for('logout') }}">
+                <img src="{{ url_for('static', filename='img/logout.png') }}" title="Выйти">
+            </a>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12 p-4">
             {% with messages = get_flashed_messages() %}

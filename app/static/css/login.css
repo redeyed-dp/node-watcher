@@ -1,0 +1,5 @@
+#container {
+    height: 100vh;
+    background-image: url(/static/img/eye-of-sauron.jpg);
+    background-size: 100%;
+}

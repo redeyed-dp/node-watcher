@@ -1,6 +1,17 @@
 from flask_wtf import FlaskForm
-from wtforms import SelectField, StringField, SubmitField
-from wtforms.validators import DataRequired, IPAddress
+from wtforms import BooleanField, PasswordField, SelectField, StringField, SubmitField
+from wtforms.validators import InputRequired, DataRequired, IPAddress
+
+class AdminForm(FlaskForm):
+    login = StringField('Логин', validators=[InputRequired(message='Введите логин')])
+    password = StringField('Пароль', validators=[InputRequired(message='Введите пароль')])
+    submit = SubmitField('Сохранить')
+
+class LoginForm(FlaskForm):
+    login = StringField('Логин', validators=[InputRequired(message='Введите логин')])
+    password = PasswordField('Пароль', validators=[InputRequired(message='Введите пароль')])
+    remember_me = BooleanField('Запомнить меня')
+    submit = SubmitField('Войти')
 
 class NodeForm(FlaskForm):
     project = SelectField("Проект", choices=[])
