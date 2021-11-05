@@ -1,0 +1,40 @@
+{% extends "template.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block modal_content %}
+<div id="node-window" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        {{ wtf.quick_form(form, form_type="horizontal", horizontal_columns=('sm', 3, 9)) }}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block app_content %}
+
+<div class="row-fluid">
+    <div class="col-12 p-4">
+        {% for node in nodes %}
+        <a class="btn btn-light col-2" role="button" href="{{ url_for('nodes', name=node) }}">
+            <img src="{{ url_for('static', filename='icon/'+node+'.png') }}"><br>
+            {{ node }}
+        </a>
+        {% endfor %}
+        <button class="btn btn-light col-2" data-toggle="modal" data-target="#node-window">
+            <img src="{{ url_for('static', filename='img/add128.png') }}"><br>
+            Добавить ноду...
+        </button>
+    </div>
+</div>
+{% endblock %}

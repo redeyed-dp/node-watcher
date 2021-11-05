@@ -1,0 +1,31 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+   Cryptech node watcher
+{% endblock %}
+
+{% block metas %}
+    <meta charset="utf8">
+    <meta name="author" content="Ermakov Pavel">
+{% endblock %}
+
+{% block content %}
+    {% block modal_content %}
+    {% endblock %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 p-4">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-info mt-3" role="alert"> {{ message }} </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {% block app_content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}

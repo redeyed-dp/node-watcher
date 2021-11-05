@@ -1,0 +1,26 @@
+{% extends "template.html" %}
+{% block app_content %}
+
+{% for node in nodelist %}
+    <div class="row border border-dark m-1">
+        <div class="col-2 d-flex flex-column">
+            <div class="text-center"><img src="{{ url_for('static', filename='icon/' + node.project + '.png') }}"></div>
+            <div class="text-center"> {{ node.name }} </div>
+            <div class="text-center"><small> {{ node.login }}@{{ node.ip }} </small></div>
+        </div>
+        <div class="col-10 node-stat" id="{{ node.id }}">
+            <div class="text-center"><img src="{{ url_for('static', filename='img/load.gif') }}"></div>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/stat.js') }}"></script>
+{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link href="{{ url_for('static', filename='css/code.css') }}" rel="stylesheet">
+{% endblock %}
