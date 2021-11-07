@@ -46,9 +46,12 @@ def admins():
         flash(f"Добавлен администратор {admin.login}")
         return redirect(url_for("admins"))
     admins = db.session.query(Admin).all()
-    f = open(app.config['DEFAULT_SSH_KEY_PATH'] + 'id_rsa.pub')
-    key = ''.join(f.readlines())
-    f.close()
+    try:
+        f = open(app.config['DEFAULT_SSH_KEY_PATH'] + 'id_rsa.pub')
+        key = ''.join(f.readlines())
+        f.close()
+    except:
+        key = f"Can not open file {app.config['DEFAULT_SSH_KEY_PATH']}id_rsa.pub"
     return render_template("admins.html", form=form, admins=admins, key=key)
 
 @app.route('/admins/del/<int:id>')

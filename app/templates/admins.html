@@ -20,6 +20,13 @@
     </div>
 {% endblock %}
 {% block app_content %}
+<div class="row m-1">
+    <div class="col-12">
+        <a class="btn btn-light" href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='img/back24.png') }}"> Назад
+        </a>
+    </div>
+</div>
 <div class="row">
     <div class="col-4 p-4">
         <button class="btn btn-light m-2" data-toggle="modal" data-target="#admin-window" data-action="add">
