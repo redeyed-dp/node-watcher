@@ -11,5 +11,8 @@ lm.init_app(app)
 lm.login_view = 'login'
 bootstrap = Bootstrap(app)
 
+from app.proxy import bp as proxy
+app.register_blueprint(proxy, url_prefix='/proxy')
+
 from app import views
 

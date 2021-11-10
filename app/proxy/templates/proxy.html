@@ -1,0 +1,74 @@
+{% extends "template.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block modal_content %}
+<div id="proxy-window" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        {{ wtf.quick_form(form, form_type="horizontal", horizontal_columns=('sm', 3, 9)) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block app_content %}
+<div class="row m-1">
+    <div class="col-12">
+        <a class="btn btn-light" href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='img/back24.png') }}"> Назад
+        </a>
+        <button class="btn btn-light" data-toggle="modal" data-target="#proxy-window">
+            <img src="{{ url_for('static', filename='img/add24.png') }}"> Добавить прокси...
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-2">IP клиента</div>
+    <div class="col-2" id="client_ip">{{ client_ip }}</div>
+    <div class="col-2">IP мониторинга</div>
+    <div class="col-2" id="self_ip">{{ self_ip }}</div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <table class="table table-sm">
+            <thead class="thead-dark">
+            <tr>
+                <th>IP:port</th>
+                <th>Логин</th>
+                <th>Пароль</th>
+                <th>Внешний IP</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for proxy in proxies %}
+                <tr>
+                    <td>{{ proxy.ip }}:{{ proxy.port }}</td>
+                    <td>{{ proxy.login }}</td>
+                    <td>{{ proxy.password }}</td>
+                    {% set test = proxy.test() %}
+                    {% if 'Error' in test %}
+                        <td class="bg-warning">{{ test }}</td>
+                    {% else %}
+                        <td class="bg-success">{{ test }}</td>
+                    {% endif %}
+                    <td>
+                        <a href="{{ url_for('proxy.delete', id=proxy.id) }}">
+                            <img src="{{ url_for('static', filename='img/delete.png')}}">
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
