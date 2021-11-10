@@ -28,6 +28,10 @@
             {{ node }}
         </a>
         {% endfor %}
+        <a class="btn btn-light col-2" role="button" href="{{ url_for('proxy.index') }}">
+            <img src="{{ url_for('static', filename='img/proxy.png') }}"><br>
+            Прокси
+        </a>
         <button class="btn btn-light col-2" data-toggle="modal" data-target="#node-window">
             <img src="{{ url_for('static', filename='img/add128.png') }}"><br>
             Добавить ноду...
