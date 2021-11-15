@@ -16,6 +16,10 @@ $(document).ready(function() {
         div.html(ldiv);
         load(id, div);
     });
+// Подтверждение удаления
+    $(document).on("click", ".btn-del", function () {
+        return confirm('Удалить ноду?');
+    });
 });
 
 function load(id, div) {
