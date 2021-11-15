@@ -87,6 +87,15 @@ def nodes(name):
     nodelist = db.session.query(Nodes).filter(Nodes.project==name).all()
     return render_template("nodes.html", nodelist=nodelist)
 
+@app.route("/nodes/del/<int:id>")
+@login_required
+def nodes_del(id):
+    node = db.session.query(Nodes).filter(Nodes.id==id).one()
+    db.session.delete(node)
+    db.session.commit()
+    flash(f"Нода {node.name} удалена из мониторинга")
+    return redirect(url_for("nodes", name=node.project))
+
 @app.route("/stat/<int:id>")
 @login_required
 def stat(id):

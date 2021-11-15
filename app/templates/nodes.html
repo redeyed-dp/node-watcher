@@ -17,6 +17,9 @@
                 <button class="btn btn-sm btn-light btn-renew" data-id="{{ node.id }}">
                     <img src="{{ url_for('static', filename='img/renew.png') }}" title="Обновить">
                 </button>
+                <a class="btn btn-sm btn-light" role="button" href="{{ url_for('nodes_del', id=node.id) }}">
+                    <img src="{{ url_for('static', filename='img/delete.png') }}" title="Удалить">
+                </a>
             </div>
         </div>
         <div class="col-10 node-stat" id="{{ node.id }}">
